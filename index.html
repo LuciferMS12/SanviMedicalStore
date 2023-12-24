@@ -3,39 +3,149 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sanvi Medical</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Sanvi Medica</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background-color: #007BFF;
+            color: #fff;
+            text-align: center;
+            padding: 0.1rem 1rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.5rem;
+        }
+        input{
+            outline: none;
+        }
+
+        header ul{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            list-style: none;
+        }
+
+        header ul li a{
+            margin-left: 1rem;
+            color: white;
+            font-family: system-ui;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 0.6rem;
+        }
+        main {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .product {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 8px;
+            border: none;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1em;
+            background-color: #007BFF;
+            color: #fff;
+        }
+
+        #cart {
+            background-color: #333;
+            color: #fff;
+            padding: 10px;
+            position: fixed;
+            top: 9vh;
+            right: 0;
+        }
+
+        #cart span {
+            margin-left: 5px;
+            font-weight: bold;
+        }
+        
+        #cart a{
+            color: white;
+            text-decoration: none;
+        }
+
+    </style>
 </head>
 <body>
+
     <header>
-        <div id="top">
-            <img src="" alt="">
-            <h2>Sanvi Medical Store</h2>
-        </div>
-        <div id="menu">
-            <button onclick="asideOn()"><img src="menu.png" alt="menu"></button>
-        </div>
+        <h1>Sanvi Medical</h1>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="form.html">Cart</a></li>
+            <li><a href="newTabAdd.html">New Tablet</a></li>
+            <li><a href="Status.html">Status</a></li>
+        </ul>
     </header>
-    <div id="main">
-        <div id="main1">
-            
-        </div>
-        <div id="transparentOff">
 
+    <main>
+        <div class="product" id="product1">
+            <h2>First Aid Kit</h2>
+            <p>An essential kit for emergency situations. Contains bandages, antiseptic wipes, scissors, and more.</p>
+            <p>₹29.99</p>
+            <button onclick="addToCart('First Aid Kit', 29.99)">Add to Cart</button>
         </div>
-        <div id="asideOff">
-            
-        </div>
-        <div id="popupoff">
 
+        <div class="product" id="product2">
+            <h2>Thermometer</h2>
+            <p>Digital thermometer for accurate temperature readings. Suitable for home and clinical use.</p>
+            <p>₹19.99</p>
+            <button onclick="addToCart('Thermometer', 19.99)">Add to Cart</button>
         </div>
-        <div id="plusIcon">
-            <button onclick="add()"><img src="plus.png" alt="plus"></button>
-        </div>
-        <div id="RemoveIcon">
-            <button id="Remover" onclick="remove()"><img src="bin.png" alt="plus"></button>
-        </div>
+
+        <!-- Add more medical products as needed -->
+
+    </main>
+
+    <div id="cart">
+        <a href="form.html"><span id="cartCount">0</span> items in cart</a>
     </div>
-    <script src="javascript.js"></script>
+
+    <footer>
+        &copy; 2023 Medical Supply Store
+    </footer>
+
+    <script>
+        let cartCount = 0;
+        if(localStorage.getItem('cart') != null)
+            cartCount = localStorage.getItem('cart');
+
+        function addToCart(productName, productPrice) {
+            cartCount++;
+            document.getElementById("cartCount").textContent = cartCount;
+            localStorage.setItem("cart",cartCount);
+            localStorage.setItem(cartCount + 'name',productName);
+            localStorage.setItem(cartCount + 'price',productPrice);
+            // You can add more sophisticated logic here, like updating a server-side cart
+            // or storing the cart items in a JavaScript array for further processing.
+        }
+    </script>
+
 </body>
 </html>

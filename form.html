@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Form</title>
+    <style>
+        input{
+            outline: none;
+            width: 4rem;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: #fff;
+            text-align: center;
+            padding: 0.1rem 1rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.5rem;
+        }
+        input{
+            outline: none;
+            margin-left: 0.5rem;
+        }
+
+        header ul{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            list-style: none;
+        }
+
+        header ul li a{
+            margin-left: 1rem;
+            color: white;
+            font-family: system-ui;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 0.7rem;
+        }
+
+        #Quin{
+            width: 3rem;
+        }
+
+        main {
+            width: 90%;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 8px;
+        }
+
+        input, textarea {
+            margin-bottom: 16px;
+            padding: 8px;
+        }
+/* 
+        #cards{
+            display: grid;
+            grid-template-columns: 1fr;
+            align-items: center;
+            justify-content: center;
+        } */
+
+        .price{
+            width: 3rem;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: #fff;
+            padding: 10px;
+            cursor: pointer;
+            margin-top: 1rem;
+            border: none;
+        }
+
+        footer {
+            text-align: center;
+            padding: 1em;
+            background-color: #007BFF;
+            color: #fff;
+        }
+        .product{
+            width: max-content;
+        }
+
+        .product{
+            display: flex;
+            align-items: center;
+        }
+
+        .check{
+            width: 2rem;
+            height: 1.5rem;
+        }
+        .off{
+            height: 0;
+            width: 0;
+        }
+        .Det{
+            width: 95.5%;
+        }
+
+        .name{
+            width: 5rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Order Cart</h1>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="form.html">Cart</a></li>
+            <li><a href="newTabAdd.html">New Tablet</a></li>
+        </ul>
+    </header>
+
+    <main>
+        <form id="orderForm"  action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScHUCvF2XKLceMWaGpjrpHO4gNl7gnGcocL6NQfeR1J8h4AeQ/formResponse" method="POST">
+            <div id="cards">
+
+            </div>
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_next" value="https://luciferms12.github.io/SanviMedical/index.html">
+            <input class="Det" type="text" name="entry.1410593678" placeholder="Full Address With pincode And Landmark">
+            <input class="Det" id="number" type="number" name="entry.858180898" placeholder="Enter Number To We Call You For Your Parcel">
+            <button type="submit" onclick="submitOrder()">Submit Order</button>
+        </form>
+        <button id="bts" onclick="Clear()">Delete Items</button>
+        <p style="color: red;">WARNING :- If You Back Your Order Was Cancel</p>
+    </main>
+
+    <footer>
+        &copy; 2023 Your Shop
+    </footer>
+
+    <script>
+         document.getElementById('number').addEventListener('focusout', function (e) {
+            e.preventDefault();
+
+            let num = document.getElementById('number').value;
+            let str = num.toString();
+            if(str.length != 10)
+            {
+                window.alert("Sir Your Number Is Wrong Please Check Number. Don't Add +91")
+            }
+
+         });
+        function submitOrder() {
+            for(let i=1;i<=localStorage.getItem("cart");i++)
+            {
+                console.log(localStorage.getItem(i+'name')+' + '+localStorage.getItem(i+'price'));
+            }
+        }
+
+        let form = document.getElementById('cards');
+            for(let i=1;i<=localStorage.getItem("cart");i++)
+            {
+                form.innerHTML += `
+                <div class="product" id="product1">
+                    <input class="name" id="${i}name" type="text" name="entry.62964121" readonly required>
+                    <input class="price" id="${i}price" type="text" name="entry.1326905164" readonly required>
+                    <input id="Quin" placeholder="Quintity" type="number" name="entry.67508436" min="1" max="10"required>
+                    <input id="${i}Status" type="text" name="entry.623853979" readonly required>
+                    <input id="${i}Box" class="off" type="checkbox">
+                </div>
+                
+                `
+            }//${i}name  ${i}price 
+            const date = new Date();
+
+            let day = date.getDate();
+            let month = date.getMonth() + 1;
+            let year = date.getFullYear();
+            if(month == 4 || month == 6 || month == 9 || month == 11)
+            {
+                if(day+4 > 31)
+                {
+                    day = (day+4)%30;
+                    if(month+1 > 12)
+                    {
+                        month = 1;
+                        year++;
+                    }
+                    else
+                        month++;
+                }
+                else
+                    day = day+4;
+            }
+            else if(month == 2)
+            {
+                if(day+4 > 31)
+                {
+                    day = (day+4)%28;
+                    if(month+1 > 12)
+                    {
+                        month = 1;
+                        year++;
+                    }
+                    else
+                        month++;
+                }
+                else
+                    day = day+4;
+            }
+            else{
+                if(day+4 > 31)
+                {
+                    day = (day+4)%31;
+                    if(month+1 > 12)
+                    {
+                        month = 1;
+                        year++;
+                    }
+                    else
+                        month++;
+                }
+                else
+                    day = day+4;
+            }
+            for(let i=1;i<=localStorage.getItem("cart");i++)
+            {
+                
+                console.log(document.getElementById(i+'name').value = localStorage.getItem(i+'name'))
+                console.log(document.getElementById(i+'price').value = localStorage.getItem(i+'price')+'₹')
+                console.log(document.getElementById(i+'Status').value = `${day}/${month}/${year}`)
+            }
+            // form.innerHTML += `<button type="button" onclick="submitOrder()">Submit Order</button>`;
+            function Clear()
+            {
+                // for(let i=1;i<=localStorage.getItem("cart");i++)
+                // {    
+                //     let a = document.getElementById(i+'Box');
+                //     a.removeAttribute('class');
+                //     a.setAttribute('class','check');
+                // }
+                // let b = document.getElementById("bts");
+                // b.removeAttribute('onclick');
+                // b.setAttribute('onclick','Delete()')
+                
+                localStorage.clear();
+                location.reload();
+            }
+            function Delete(){
+                let temp = localStorage.getItem('cart');
+                for(let i=1;i<=localStorage.getItem("cart");i++)
+                {    
+                    let arr = [];
+                    let arr1 = [];
+                    let a = document.getElementById(i+'Box');
+                    a.removeAttribute('class');
+                    a.setAttribute('class','off');
+                    if(a.checked == true)
+                    {
+                        localStorage.removeItem(i+'name');
+                        localStorage.removeItem(i+'price');
+                        temp--;
+                        for(j=i;j<=localStorage.getItem("cart");j++)
+                        {
+                            arr.push(localStorage.getItem(j+1+'name'));
+                            arr1.push(localStorage.getItem(j+1+'price'));
+                        }
+                        console.log(arr[0]);
+                        localStorage.clear();
+                        console.log(arr[0]);
+                        for(let j=1;j<=temp;j++)
+                        {
+                            localStorage.setItem(j+"name",arr[i-1])
+                            localStorage.setItem(j+"price",arr1[i-1])
+                        }
+                    }
+                }
+                let b = document.getElementById("bts");
+                b.removeAttribute('onclick');
+                b.setAttribute('onclick','Clear()')
+                localStorage.setItem("cart",temp);
+            }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Item Tracking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        header {
+            background-color: #007BFF;
+            color: #fff;
+            text-align: center;
+            padding: 0.1rem 1rem;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.5rem;
+        }
+        input{
+            outline: none;
+        }
+
+        header ul{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            list-style: none;
+        }
+
+        header ul li a{
+            margin-left: 1rem;
+            color: white;
+            font-family: system-ui;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 0.7rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        input[type="text"], input[type="number"], input[type="date"] {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 15px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Item Tracking</h1>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="form.html">Cart</a></li>
+            <li><a href="newTabAdd.html">New Tablet</a></li>
+            <li><a href="Status.html">Status</a></li>
+        </ul>
+    </header>
+<!-- 
+    <table id="itemTable">
+        <thead>
+            <tr>
+                <th>Item Name</th>
+                <th>Quantity</th>
+                <th>Arrival Date</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table> -->
+    <iframe src="https://script.google.com/macros/s/AKfycbzEwhRgM6afw8tYHr2qj3ESwD4ximZum-5YhlSkGs7RrrIbH4mY5S6hJirvjvxsTByepg/exec" width="100%" height="500px" frameborder="0"></iframe>
+
+    <script>
+        for(let i=1;i<localStorage.getItem('cart');i++)
+        {
+            var itemName = localStorage.getItem(i+'name');
+            var quantity = 12;
+            var arrivalDate = '27/11/2023';
+            var price = localStorage.getItem(i+'price');
+            var newRow = document.createElement('tr');
+            newRow.innerHTML = '<td>' + itemName + '</td><td>' + quantity + '</td><td>' + arrivalDate + '</td><td>' + price + '</td>';
+            document.getElementById('itemTable').getElementsByTagName('tbody')[0].appendChild(newRow);
+        }
+        var newRow = document.createElement('tr');
+        newRow.innerHTML = '<td>' + itemName + '</td><td>' + quantity + '</td><td>' + arrivalDate + '</td><td>' + price + '</td>';
+        document.getElementById('itemTable').getElementsByTagName('tbody')[0].appendChild(newRow);
+    </script>
+
+</body>
+</html>
